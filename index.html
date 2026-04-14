@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>CoinFlip Trader - Randomness Reality Check</title>
     <style>
 /* Base Styles */
@@ -50,13 +50,15 @@ body.light-mode {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
     padding: 20px;
     transition: background 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -508,6 +510,7 @@ input:checked + .slider:before {
 
 .chart-container canvas {
     max-height: 300px;
+    width: 100% !important;
 }
 
 /* Trade History */
@@ -529,6 +532,7 @@ input:checked + .slider:before {
     overflow-x: auto;
     max-height: 500px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -550,6 +554,7 @@ th {
     color: var(--text-secondary);
     font-weight: 600;
     border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
 }
 
 td {
@@ -607,68 +612,6 @@ tbody tr:hover {
     line-height: 1.8;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 1.8rem;
-    }
-
-    .subtitle {
-        font-size: 0.95rem;
-    }
-
-    .settings-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .controls {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .advanced-metrics {
-        grid-template-columns: 1fr;
-    }
-
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .charts-section {
-        grid-template-columns: 1fr;
-    }
-
-    .coin {
-        width: 120px;
-        height: 120px;
-    }
-
-    .coin-face {
-        font-size: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-value {
-        font-size: 1.5rem;
-    }
-}
-
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
     width: 10px;
@@ -709,6 +652,377 @@ tbody tr:hover {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+/* Tablets and smaller screens */
+@media (max-width: 1024px) {
+    .charts-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .advanced-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    /* Header - stacked layout */
+    .header {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+
+    .header-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-top > div:first-child {
+        width: 100%;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+        justify-content: center;
+    }
+
+    /* Settings - single column */
+    .settings-panel {
+        padding: 20px 15px;
+    }
+
+    .settings-panel h2 {
+        font-size: 1.2rem;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Controls - 2x2 grid */
+    .controls {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        min-width: auto;
+        width: 100%;
+    }
+
+    /* Coin section */
+    .coin-section {
+        margin-bottom: 20px;
+    }
+
+    .coin-container {
+        padding: 25px 15px;
+    }
+
+    .coin {
+        width: 120px;
+        height: 120px;
+    }
+
+    .coin-face {
+        font-size: 80px;
+    }
+
+    .result-text {
+        font-size: 1.5rem;
+    }
+
+    /* Stats - 2 columns */
+    .stats-dashboard h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-card h3 {
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+    }
+
+    .stat-value {
+        font-size: 1.4rem;
+    }
+
+    /* Advanced metrics - single column */
+    .advanced-metrics {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .metric-group {
+        padding: 20px 15px;
+    }
+
+    .metric-group h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .metric-item {
+        padding: 10px;
+    }
+
+    .metric-label {
+        font-size: 0.85rem;
+    }
+
+    .metric-value {
+        font-size: 0.9rem;
+    }
+
+    /* Charts - single column */
+    .charts-section {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .chart-container {
+        padding: 20px 15px;
+    }
+
+    .chart-container h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .chart-container canvas {
+        max-height: 250px;
+    }
+
+    /* Trade history */
+    .trade-history {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+
+    .trade-history h2 {
+        font-size: 1.3rem;
+    }
+
+    .table-wrapper {
+        max-height: 400px;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Reality check */
+    .reality-check {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+    }
+
+    .reality-check h2 {
+        font-size: 1.3rem;
+    }
+
+    .message-box {
+        padding: 15px;
+    }
+
+    .message-box p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+
+    .header {
+        padding: 15px 12px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    /* Controls - smaller buttons */
+    .controls {
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 14px 15px;
+        font-size: 0.8rem;
+    }
+
+    /* Coin smaller */
+    .coin {
+        width: 100px;
+        height: 100px;
+    }
+
+    .coin-face {
+        font-size: 65px;
+    }
+
+    .result-text {
+        font-size: 1.3rem;
+    }
+
+    /* Stats - still 2 columns but smaller */
+    .stats-grid {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-card h3 {
+        font-size: 0.7rem;
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+    }
+
+    /* Charts even smaller */
+    .chart-container canvas {
+        max-height: 200px;
+    }
+
+    .chart-container {
+        padding: 15px 10px;
+    }
+
+    .table-wrapper {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .header h1 {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        padding: 12px 10px;
+        font-size: 0.75rem;
+    }
+
+    .stat-value {
+        font-size: 1rem;
+    }
+
+    .chart-container canvas {
+        max-height: 180px;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .coin {
+        width: 80px;
+        height: 80px;
+    }
+
+    .coin-face {
+        font-size: 50px;
+    }
+
+    .chart-container canvas {
+        max-height: 150px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .btn {
+        min-height: 44px;
+    }
+
+    .setting-item input:not([type="checkbox"]),
+    .setting-item select {
+        min-height: 44px;
+    }
+
+    /* Remove hover effects on touch devices */
+    .stat-card:hover {
+        transform: none;
+    }
+
+    .btn:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
+/* Safe area for notched phones */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    @media (max-width: 768px) {
+        body {
+            padding-left: max(12px, env(safe-area-inset-left));
+            padding-right: max(12px, env(safe-area-inset-right));
+        }
+    }
+}
+
     </style>
 </head>
 <body class="light-mode">
@@ -1100,7 +1414,6 @@ function updateStatistics() {
     const netPnL = state.currentBalance - state.initialBalance;
     const returnPercent = ((state.currentBalance - state.initialBalance) / state.initialBalance) * 100;
 
-    // Calculate wins and losses arrays
     const winTrades = state.trades.filter(t => t.result === 'win').map(t => t.pnl);
     const lossTrades = state.trades.filter(t => t.result === 'loss').map(t => Math.abs(t.pnl));
 
@@ -1110,20 +1423,17 @@ function updateStatistics() {
     const largestLoss = lossTrades.length > 0 ? Math.max(...lossTrades) : 0;
     const avgTradePnL = totalTrades > 0 ? state.trades.reduce((sum, t) => sum + t.pnl, 0) / totalTrades : 0;
 
-    // Profit Factor = Gross Profit / Gross Loss
     const grossProfit = winTrades.reduce((a, b) => a + b, 0);
     const grossLoss = lossTrades.reduce((a, b) => a + b, 0);
     const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? Infinity : 0;
 
-    // Expectancy = (Win% * Avg Win) - (Loss% * Avg Loss)
     const expectancy = (winRate / 100 * avgWin) - ((100 - winRate) / 100 * avgLoss);
 
-    // Calculate streaks
     let maxConsecWins = 0;
     let maxConsecLosses = 0;
     let currentConsecWins = 0;
     let currentConsecLosses = 0;
-    let currentStreak = 0; // positive for wins, negative for losses
+    let currentStreak = 0;
 
     state.trades.forEach(trade => {
         if (trade.result === 'win') {
@@ -1146,7 +1456,6 @@ function updateStatistics() {
         }
     }
 
-    // Calculate drawdown
     let peak = state.initialBalance;
     let maxDrawdown = 0;
     let currentDrawdown = 0;
@@ -1162,7 +1471,6 @@ function updateStatistics() {
         currentDrawdown = ((peakBalance - state.currentBalance) / peakBalance) * 100;
     }
 
-    // Update DOM
     elements.totalTrades.textContent = totalTrades;
     elements.totalWins.textContent = wins;
     elements.totalLosses.textContent = losses;
@@ -1194,7 +1502,6 @@ function updateStatistics() {
 
     elements.riskPerTrade.textContent = formatCurrency(getRiskAmount());
 
-    // Probability reality check
     const expectedRate = state.useCustomWinRate ? state.customWinRate : 50;
     const deviation = Math.abs(winRate - expectedRate);
     elements.expectedWinRate.textContent = expectedRate.toFixed(1) + '%';
@@ -1203,7 +1510,6 @@ function updateStatistics() {
     elements.deviation.textContent = deviation.toFixed(2) + '%';
     elements.deviation.className = 'metric-value ' + (deviation < 2 ? 'win' : deviation < 5 ? '' : 'loss');
 
-    // Law of Large Numbers message
     if (totalTrades < 10) {
         elements.lawOfLargeNumbers.textContent = 'Too few trades';
     } else if (totalTrades < 100) {
@@ -1214,10 +1520,8 @@ function updateStatistics() {
         elements.lawOfLargeNumbers.textContent = 'Near expected (Law of Large Numbers)';
     }
 
-    // Next trade probability
     elements.nextTradeProbability.textContent = expectedRate.toFixed(1) + '%';
 
-    // Trading mode
     elements.tradingMode.textContent = state.useCustomWinRate ? `Custom (${state.customWinRate}%)` : 'Pure 50/50';
     elements.tradingMode.className = 'metric-value ' + (state.useCustomWinRate ? '' : 'win');
 }
@@ -1320,7 +1624,6 @@ function initCharts() {
         }
     };
 
-    // Equity Curve
     const equityCtx = document.getElementById('equityCurve').getContext('2d');
     state.charts.equityCurve = new Chart(equityCtx, {
         type: 'line',
@@ -1340,14 +1643,11 @@ function initCharts() {
             ...chartDefaults,
             plugins: {
                 ...chartDefaults.plugins,
-                title: {
-                    display: false
-                }
+                title: { display: false }
             }
         }
     });
 
-    // Win/Loss Distribution
     const winLossCtx = document.getElementById('winLossChart').getContext('2d');
     state.charts.winLoss = new Chart(winLossCtx, {
         type: 'doughnut',
@@ -1374,7 +1674,6 @@ function initCharts() {
         }
     });
 
-    // Drawdown Chart
     const drawdownCtx = document.getElementById('drawdownChart').getContext('2d');
     state.charts.drawdown = new Chart(drawdownCtx, {
         type: 'line',
@@ -1401,7 +1700,6 @@ function initCharts() {
         }
     });
 
-    // Win Rate Convergence Chart
     const winRateCtx = document.getElementById('winRateChart').getContext('2d');
     state.charts.winRate = new Chart(winRateCtx, {
         type: 'line',
@@ -1445,18 +1743,15 @@ function initCharts() {
 function updateCharts() {
     const totalTrades = state.trades.length;
 
-    // Update Equity Curve
     state.charts.equityCurve.data.labels = Array.from({ length: totalTrades + 1 }, (_, i) => i);
     state.charts.equityCurve.data.datasets[0].data = state.equityCurve;
     state.charts.equityCurve.update('none');
 
-    // Update Win/Loss
     const wins = state.trades.filter(t => t.result === 'win').length;
     const losses = totalTrades - wins;
     state.charts.winLoss.data.datasets[0].data = [wins, losses];
     state.charts.winLoss.update('none');
 
-    // Update Drawdown
     let peak = state.initialBalance;
     const drawdowns = [0];
     state.equityCurve.slice(1).forEach((balance, i) => {
@@ -1468,7 +1763,6 @@ function updateCharts() {
     state.charts.drawdown.data.datasets[0].data = drawdowns;
     state.charts.drawdown.update('none');
 
-    // Update Win Rate Convergence
     const expectedRate = state.useCustomWinRate ? state.customWinRate : 50;
     const winRateData = [];
     let cumulativeWins = 0;
@@ -1535,17 +1829,14 @@ function startAutoFlip() {
         addTradeToTable(trade);
         updateStatistics();
 
-        // Update result display
         elements.result.textContent = result === 'win' ? '✓ WIN' : '✗ LOSS';
         elements.result.className = 'result-text ' + result;
 
-        // Update charts every 10 trades for performance
         if (count % 10 === 0 || count === numTrades) {
             updateCharts();
             updateRealityMessage();
         }
 
-        // Update progress
         elements.flipAuto.textContent = `⏸ ${count}/${numTrades}`;
 
     }, speed);
@@ -1710,7 +2001,6 @@ elements.themeSwitch.addEventListener('change', () => {
     setTimeout(updateChartThemes, 100);
 });
 
-// Settings listeners
 [elements.initialBalance, elements.riskPercent, elements.riskRewardRatio, elements.customRR, elements.enableCustomWinRate, elements.customWinRate].forEach(el => {
     el.addEventListener('change', updateParameters);
 });
